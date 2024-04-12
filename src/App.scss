@@ -1,0 +1,391 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap");
+
+// Primary
+$Bright_blue: hsl(220, 98%, 61%);
+$check_bg: linear-gradient(136deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+
+// Light theme
+$very_light_grey: hsl(0, 0%, 98%);
+$very_light_grayish_blue: hsl(236, 33%, 92%);
+$light_grayish_blue: hsl(233, 11%, 84%);
+$dark_grayish_blue_light: hsl(236, 9%, 61%);
+$very_dark_grayish_blue: hsl(235, 19%, 35%);
+
+// Dark theme
+$very_dark_blue: hsl(235, 21%, 11%);
+$very_dark_desaturated_Blue: hsl(235, 24%, 19%);
+$ligh_grayish_blue: hsl(234, 39%, 85%);
+$ligh_grayish_blue_hover: hsl(236, 33%, 92%);
+$dark_grayish_blue_dark: hsl(234, 11%, 52%);
+$drak_gryaish_one: hsl(233, 14%, 35%);
+$drak_gryaish_two: hsl(237, 14%, 26%);
+
+// mixins
+
+@mixin circle {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid $drak_gryaish_one;
+  background-color: $very_dark_desaturated_Blue;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+}
+
+// App
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  background-color: $very_dark_blue;
+  position: relative;
+  overflow-y: auto;
+
+  .header {
+    width: 100%;
+    height: 35vh;
+    background-image: url("./assets/bg-desktop-dark.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .todos-container {
+    max-width: 50rem;
+    width: 100%;
+    position: absolute;
+    top: 7%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .todos-header {
+      width: 100%;
+      height: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4rem;
+
+      h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        color: $very_light_grey;
+        text-transform: uppercase;
+        letter-spacing: 1rem;
+      }
+
+      img {
+        cursor: pointer;
+      }
+    }
+
+    .input-container {
+      width: 100%;
+      padding: 2rem;
+      margin-bottom: 4rem;
+      background-color: $very_dark_desaturated_Blue;
+      border-radius: 4px;
+      box-shadow: black 0px 15px 50px 0px;
+
+      form {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        input {
+          background-color: transparent;
+          border: none;
+          outline: none;
+          width: 100%;
+          caret-color: $Bright_blue;
+          color: $light_grayish_blue;
+          font-size: 1.8rem;
+        }
+
+        .circle {
+          @include circle;
+          margin-right: 1.5rem;
+        }
+      }
+    }
+
+    .todo-container {
+      width: 100%;
+      position: relative;
+      border-radius: 4px;
+      box-shadow: black 0px 15px 50px 0px;
+      overflow: hidden;
+
+      .create-new {
+        width: 100%;
+        height: 200px;
+        background-color: $very_dark_desaturated_Blue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        color: $light_grayish_blue;
+
+        svg {
+          fill: $light_grayish_blue;
+          width: 3rem;
+          height: 3rem;
+        }
+      }
+
+      .todo {
+        width: 100%;
+        padding: 2rem;
+        cursor: pointer;
+        background-color: $very_dark_desaturated_Blue;
+        border-bottom: 1px solid $drak_gryaish_two;
+        display: flex;
+        align-items: center;
+
+        .outer {
+          width: 3rem;
+          height: 3rem;
+          margin-right: 1.5rem;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          &:hover {
+            background: $check_bg;
+          }
+
+          .circle {
+            @include circle;
+            > img {
+              display: none;
+            }
+
+            &:hover {
+              border: none;
+            }
+
+            &.active {
+              background: $check_bg;
+              border: none;
+
+              > img {
+                display: inline-block;
+              }
+            }
+          }
+        }
+
+        .todo-content {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          p {
+            font-size: 1.8rem;
+            color: $light_grayish_blue;
+            overflow: auto;
+            width: 100%;
+          }
+
+          &.active {
+            p {
+              text-decoration: line-through;
+              color: $dark_grayish_blue_dark;
+            }
+          }
+          > img {
+            display: none;
+          }
+          &:hover {
+            > img {
+              display: inline-block;
+            }
+          }
+        }
+      }
+
+      .todos-footer {
+        background-color: $very_dark_desaturated_Blue;
+        width: 100%;
+        padding: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: $drak_gryaish_one;
+        .categories {
+          display: flex;
+          gap: 1.5rem;
+          p {
+            cursor: pointer;
+
+            &.active {
+              color: $Bright_blue;
+            }
+
+            &:hover {
+              color: $ligh_grayish_blue;
+            }
+          }
+        }
+
+        .clear {
+          cursor: pointer;
+          &:hover {
+            color: $light_grayish_blue;
+          }
+        }
+      }
+    }
+
+    > p {
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-top: 50px;
+      margin-bottom: 50px;
+      font-size: 1.3rem;
+      color: $dark_grayish_blue_dark;
+    }
+  }
+
+  &.light {
+    background-color: $very_light_grey;
+
+    .header {
+      background-image: url("./assets/bg-desktop-light.jpg");
+    }
+
+    .todos-container {
+      .input-container {
+        background-color: $very_light_grey;
+        box-shadow: #222 0px 15px 33px -17px;
+
+        form {
+          input {
+            color: $very_dark_grayish_blue;
+          }
+
+          .circle {
+            background-color: $very_light_grey;
+            border-color: $light_grayish_blue;
+          }
+        }
+      }
+
+      .todo-container {
+        box-shadow: $ligh_grayish_blue 0px 15px 20px 0;
+        .create-new {
+        background-color: $very_light_grey;
+        color: $very_dark_grayish_blue;
+
+        svg {
+          fill: $very_dark_grayish_blue;
+          width: 3rem;
+          height: 3rem;
+        }
+      }
+        .todo {
+          background-color: $very_light_grey;
+          border-bottom-color: $light_grayish_blue;
+
+          .outer {
+            .circle {
+              background-color: $very_light_grey;
+              border-color: $light_grayish_blue;
+            }
+          }
+
+          .todo-content {
+            p {
+              color: $very_dark_grayish_blue;
+            }
+            &.active {
+              p {
+                color: $light_grayish_blue;
+              }
+            }
+          }
+        }
+
+        .todos-footer {
+          background-color: $very_light_grey;
+          color: $dark_grayish_blue_light;
+
+          .categories {
+            p {
+              &:hover {
+                color: $very_dark_grayish_blue;
+              }
+            }
+          }
+
+          .clear {
+            &:hover {
+              color: $very_dark_grayish_blue;
+            }
+          }
+        }
+      }
+
+      > p {
+        color: $dark_grayish_blue_light;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .app {
+    .todos-container {
+      width: 80%;
+      .todo-container {
+        overflow: visible;
+        .todo {
+          &:first-child {
+            border-radius: 4px 4px 0 0;
+          }
+          .todo-content {
+            p {
+              font-size: 1.4rem;
+            }
+          }
+        }
+      }
+
+      .todos-footer {
+        position: relative;
+        border-radius: 0 0 4px 4px;
+
+        .categories {
+          position: absolute;
+          bottom: -75px;
+          left: 0;
+          background-color: inherit;
+          padding: 20px;
+          width: 100%;
+          border-radius: 4px;
+          justify-content: center;
+          box-shadow:  black 0px 15px 50px 0px;
+          font-size: 1.5rem;
+        }
+      }
+
+      > p {
+        margin-top: 12rem;
+      }
+    }
+
+    &.light {
+      .todos-container {
+        .todos-footer {
+          .categories {
+            box-shadow: $ligh_grayish_blue 0px 15px 20px 0;
+          }
+        }
+      }
+    }
+  }
+}
